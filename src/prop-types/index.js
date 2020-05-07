@@ -3,6 +3,7 @@ import { noop } from '../utils'
 
 export const propTypes = {
   tabs: PropTypes.array,
+  disableTabs: PropTypes.arrayOf(PropTypes.number),
   pos: PropTypes.object,
   width: PropTypes.number,
   height: PropTypes.number,
@@ -16,6 +17,8 @@ export const propTypes = {
   style: PropTypes.object,
   scrollViewStyle: PropTypes.object,
   underlineStyle: PropTypes.object,
+  tabDisableStyle: PropTypes.object,
+  tabTextDisableStyle: PropTypes.object,
   tabStyle: PropTypes.object,
   tabActiveStyle: PropTypes.object,
   tabTextStyle: PropTypes.object,
@@ -30,6 +33,7 @@ export const propTypes = {
 
 export const defaultProps = {
   tabs: [],
+  disableTabs: [],
   pos: null,
   width: undefined,
   height: undefined,
@@ -44,6 +48,8 @@ export const defaultProps = {
   tabActiveStyle: {},
   tabTextStyle: {},
   tabTextActiveStyle: {},
+  tabDisableStyle: {},
+  tabTextDisableStyle: {},
   hasUnderline: true,
   scrollEnabled: true,
   hasAnimation: true,

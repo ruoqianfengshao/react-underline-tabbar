@@ -330,13 +330,14 @@ export default function ScrollPageHOC(WrappedComponent) {
     }
 
     renderTab = (tab, page) => {
-      const { activeTab, renderTab } = this.props
+      const { activeTab, renderTab, disableTabs, tabDisableStyle, tabTextDisableStyle } = this.props
       const isTabActive = activeTab === page
-      const onPress = () => this._onPress(page, tab)
+      const isTabDisable = disableTabs.indexOf(page) > -1
+      const onPress = isTabDisable ? () => false : () => this._onPress(page, tab)
       const onLayout = event => this.onTabLayout(event, page)
 
       if (renderTab) {
-        const element = renderTab({ tab, page, onPress, onLayout, isTabActive })
+        const element = renderTab({ tab, page, onPress, onLayout, isTabActive, isTabDisable })
         return React.cloneElement(element, { onLayout })
       }
       const { label } = tab
@@ -344,13 +345,13 @@ export default function ScrollPageHOC(WrappedComponent) {
 
       return (
         <Button
-          style={mergeStyle(tabStyle, isTabActive ? tabActiveStyle : {})}
+          style={mergeStyle(tabStyle, isTabActive ? tabActiveStyle : {}, isTabDisable ? tabDisableStyle : {})}
           key={page}
           onPress={onPress}
           onLayout={onLayout}
         >
           <Text
-            style={mergeStyle(tabTextStyle, isTabActive ? tabTextActiveStyle : {})}
+            style={mergeStyle(tabTextStyle, isTabActive ? tabTextActiveStyle : {}, isTabDisable ? tabTextDisableStyle : {})}
           >
             {label}
           </Text>

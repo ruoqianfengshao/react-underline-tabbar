@@ -9,7 +9,9 @@ const textDefaultStyle = { whiteSpace: 'nowrap' }
 
 class Button extends Component {
   render() {
-    const { onPress, onLayout, style, ...otherProps } = this.props
+    const {
+      onPress, onLayout, style, ...otherProps
+    } = this.props
     const extraProps = {}
     if (onPress) {
       extraProps.onClick = onPress
@@ -32,7 +34,9 @@ const AnimatedView = Animated.div
 
 const ref = onLayout => (dom) => {
   if (dom && onLayout) {
-    const { offsetLeft, offsetTop, offsetWidth, offsetHeight } = dom
+    const {
+      offsetLeft, offsetTop, offsetWidth, offsetHeight,
+    } = dom
 
     onLayout({
       nativeEvent: {
@@ -101,7 +105,9 @@ class ScrollView extends Component {
   }
 
   _onScroll = (event) => {
-    const { scrollLeft: x, scrollTop: y, scrollWidth: width, scrollHeight: height, offsetWidth, offsetHeight } = event.currentTarget
+    const {
+      scrollLeft: x, scrollTop: y, scrollWidth: width, scrollHeight: height, offsetWidth, offsetHeight,
+    } = event.currentTarget
     const { onScroll } = this.props
 
     const nativeEvent = {

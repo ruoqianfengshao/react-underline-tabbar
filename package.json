@@ -1,5 +1,5 @@
 {
-  "name": "react-underline-tabbar",
+  "name": "@terminus/react-underline-tabbar",
   "version": "1.1.7",
   "description": "react underline tabbar",
   "main": "./lib",
@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TaumuLu/react-underline-tabbar.git"
+    "url": "https://github.com/ruoqianfengshao/react-underline-tabbar"
   },
   "author": "TaumuLu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TaumuLu/react-underline-tabbar/issues"
+    "url": "https://github.com/ruoqianfengshao/react-underline-tabbar/issues"
   },
   "keywords": [
     "react",
@@ -25,7 +25,7 @@
     "tabbar",
     "scroll tabs"
   ],
-  "homepage": "https://github.com/TaumuLu/react-underline-tabbar#readme",
+  "homepage": "https://github.com/ruoqianfengshao/react-underline-tabbar#readme",
   "dependencies": {
     "animated": "^0.2.2"
   },
