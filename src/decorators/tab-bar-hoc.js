@@ -1,12 +1,17 @@
 import React from 'react'
 import { propTypes, defaultProps } from '../prop-types'
-import { size, keys, get, createTranslateXScaleX, transformOrigin, mergeStyle, getMergeObject, isEqual } from '../utils'
-import { matrixKey, Button, ScrollView, Animated, Easing, AnimatedView, View, Text, Style } from '../components'
+import {
+  size, keys, get, createTranslateXScaleX, transformOrigin, mergeStyle, getMergeObject, isEqual
+} from '../utils'
+import {
+  matrixKey, Button, ScrollView, Animated, Easing, AnimatedView, View, Text, Style
+} from '../components'
 
 
 export default function ScrollPageHOC(WrappedComponent) {
   return class TabBarHOC extends WrappedComponent {
     static defaultProps = defaultProps
+
     static propTypes = propTypes
 
     constructor(props) {
@@ -91,7 +96,9 @@ export default function ScrollPageHOC(WrappedComponent) {
     }
 
     _onContentSizeChange = (width, height) => {
-      const scrollViewValue = { x: 0, y: 0, width, height }
+      const scrollViewValue = {
+        x: 0, y: 0, width, height,
+      }
       const isUpdate = !isEqual(this.scrollViewLayout || {}, scrollViewValue)
 
       this.scrollViewLayout = scrollViewValue
@@ -99,6 +106,7 @@ export default function ScrollPageHOC(WrappedComponent) {
     }
 
     _tempCount = 0
+
     _checkCount() {
       const { tabs } = this.props
       const currentTabsLen = size(tabs)
@@ -113,11 +121,17 @@ export default function ScrollPageHOC(WrappedComponent) {
     }
 
     onTabLayout({ nativeEvent }, page) {
-      const { x, y, width, height } = nativeEvent.layout
-      const tabValue = { x, y, width, height }
+      const {
+        x, y, width, height,
+      } = nativeEvent.layout
+      const tabValue = {
+        x, y, width, height,
+      }
       const isUpdate = !isEqual(get(this.tabState, page, {}), tabValue)
 
-      this.tabState[page] = { x, y, width, height }
+      this.tabState[page] = {
+        x, y, width, height,
+      }
       if (isUpdate) {
         this._checkCount(page)
       }
@@ -209,7 +223,9 @@ export default function ScrollPageHOC(WrappedComponent) {
       const getKey = vertical ? 'height' : 'width'
 
       inputRange.forEach((key) => {
-        const { x, y, width = 0, height = 0 } = this.tabState[key]
+        const {
+          x, y, width = 0, height = 0,
+        } = this.tabState[key]
         outputRangePos.push(vertical ? y : x)
         outputRangeValue.push(vertical ? height : width)
       })
@@ -330,23 +346,30 @@ export default function ScrollPageHOC(WrappedComponent) {
     }
 
     renderTab = (tab, page) => {
-      const { activeTab, renderTab, disableTabs, tabDisableStyle, tabTextDisableStyle } = this.props
+      const {
+        activeTab, renderTab, disableTabs, tabDisableStyle, tabTextDisableStyle,
+      } = this.props
       const isTabActive = activeTab === page
       const isTabDisable = disableTabs.indexOf(page) > -1
-      const onPress = isTabDisable ? () => false : () => this._onPress(page, tab)
+      const onPress = () => this._onPress(page, tab)
       const onLayout = event => this.onTabLayout(event, page)
 
       if (renderTab) {
-        const element = renderTab({ tab, page, onPress, onLayout, isTabActive, isTabDisable })
+        const element = renderTab({
+          tab, page, onPress, onLayout, isTabActive, isTabDisable,
+        })
         return React.cloneElement(element, { onLayout })
       }
       const { label } = tab
-      const { tabStyle, tabActiveStyle, tabTextStyle, tabTextActiveStyle } = this._getStyle()
+      const {
+        tabStyle, tabActiveStyle, tabTextStyle, tabTextActiveStyle,
+      } = this._getStyle()
 
       return (
         <Button
           style={mergeStyle(tabStyle, isTabActive ? tabActiveStyle : {}, isTabDisable ? tabDisableStyle : {})}
           key={page}
+          disabled={isTabDisable}
           onPress={onPress}
           onLayout={onLayout}
         >
@@ -363,7 +386,9 @@ export default function ScrollPageHOC(WrappedComponent) {
       if (isClearCache) this.Style = null
       if (this.Style) return this.Style
 
-      const { style, scrollViewStyle, underlineStyle, tabStyle, tabActiveStyle, tabTextStyle, tabTextActiveStyle, vertical } = this.props
+      const {
+        style, scrollViewStyle, underlineStyle, tabStyle, tabActiveStyle, tabTextStyle, tabTextActiveStyle, vertical,
+      } = this.props
 
       const baseStyles = getMergeObject(defaultStyle, {
         containerStyle: style,
