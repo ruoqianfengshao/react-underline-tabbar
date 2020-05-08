@@ -1,10 +1,10 @@
 import React from 'react'
 import { propTypes, defaultProps } from '../prop-types'
 import {
-  size, keys, get, createTranslateXScaleX, transformOrigin, mergeStyle, getMergeObject, isEqual
+  size, keys, get, mergeStyle, getMergeObject, isEqual
 } from '../utils'
 import {
-  matrixKey, Button, ScrollView, Animated, Easing, AnimatedView, View, Text, Style
+  Button, ScrollView, Animated, Easing, AnimatedView, View, Text, Style
 } from '../components'
 
 
@@ -48,7 +48,7 @@ export default function ScrollPageHOC(WrappedComponent) {
     }
 
     componentDidMount() {
-      const { hasAnimation, pos, isTest } = this.props
+      const { hasAnimation, pos } = this.props
 
       if (hasAnimation) {
         const { scrollValue } = this.state
@@ -353,6 +353,7 @@ export default function ScrollPageHOC(WrappedComponent) {
       const isTabDisable = disableTabs.indexOf(page) > -1
       const onPress = () => this._onPress(page, tab)
       const onLayout = event => this.onTabLayout(event, page)
+      const disableStyle = { pointerEvents: 'none', ...tabDisableStyle }
 
       if (renderTab) {
         const element = renderTab({
@@ -367,7 +368,7 @@ export default function ScrollPageHOC(WrappedComponent) {
 
       return (
         <Button
-          style={mergeStyle(tabStyle, isTabActive ? tabActiveStyle : {}, isTabDisable ? tabDisableStyle : {})}
+          style={mergeStyle(tabStyle, isTabActive ? tabActiveStyle : {}, isTabDisable ? disableStyle : {})}
           key={page}
           disabled={isTabDisable}
           onPress={onPress}
